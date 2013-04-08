@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+
+		RewriteEngine On
+
+		RewriteBase /template/responsive_test/
+
+		# Replaces the relative links to the root directory
+		RewriteRule ^inventory_new[\/]?([^/.]?+/?[^/.]+/?[^/.]+/?[^/.]+[/]?)?(images|js|stylesheets|lib[^/.]+)/(.*)$ $2/$3 [L]
+
+		# Changes the 'fake' folders in php variables
+		RewriteRule ^inventory_new/([^/.]+)/?([^/.]+)/?([^/.]+)/?([^/.]+) inventory_new.php?make=$1&year=$2&vin=$4&model=$3 [L]
+
+		# If none redirects to just the php file
+		RewriteRule ^inventory_new inventory_new.php [L]
+
+</IfModule>
+
