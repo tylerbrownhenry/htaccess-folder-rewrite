@@ -1,5 +1,5 @@
 #This one requires less hard coded information as well as hides the php file extension
-
+# For anyone else, this is for a site ran on path, that
 <IfModule mod_rewrite.c>
 
 		RewriteEngine On
@@ -10,7 +10,7 @@
 		RewriteRule ^([A-Za-z\-\_]+)[\/]?([^/.]?+/?[^/.]+/?[^/.]+/?[^/.]+[/]?)?(images|js|stylesheets|lib[^/.]+)/(.*)$ $3/$4 [L]
 
 		# Changes the 'fake' folders in php variables
-		RewriteRule ^((?!images|js|stylesheets|lib)[A-Za-z\-\_]+)/([^/.]+)/?([^/.]+)/?([^/.]+)/?([^/.]+) $1.php?page=$1&make=$2&year=$3&model=$4&vin=$5 [L]
+		RewriteRule ^((?!images|js|stylesheets|lib)[A-Za-z\-\_]+)/([^/.]+)/?([^/.]+)/?([^/.]+)/?([^/.]+) $1.php?b=$1&d=$2&f=$3&h=$4&g=$5 [L]
 
 		# If none redirects to just the php file
 		RewriteRule ^([A-Za-z\-\_]+)$ $1.php?page=$1 [L]
