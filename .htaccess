@@ -1,19 +1,7 @@
-#This one requires less hard coded information as well as hides the php file extension
-# For anyone else, this is for a site ran on path, that
 <IfModule mod_rewrite.c>
 
 		RewriteEngine On
 		RewriteBase /template/responsive_test/
-
-<<<<<<< HEAD
-		# Replaces the relative links to the root directory for images/stylesheets/js files
-		RewriteRule ^([A-Za-z\-\_]+)[\/]?([^/.]?+/?[^/.]+/?[^/.]+/?[^/.]+[/]?)?(images|js|stylesheets|lib[^/.]+)/(.*)$ $3/$4 [L]
-
-		# Changes the 'fake' folders in php variables
-		RewriteRule ^((?!images|js|stylesheets|lib)[A-Za-z\-\_]+)/([^/.]+)/?([^/.]+)/?([^/.]+)/?([^/.]+) $1.php?b=$1&d=$2&f=$3&h=$4&g=$5 [L]
-=======
-
-
 
 		# Replaces the relative links to the root directory for images/stylesheets/js files
 		RewriteRule ^([A-Za-z\-\_]+)[\/]?([^/.]?+/?[^/.]+/?[^/.]+/?[^/.]+/?[^/.]+/?[^/.]+/?[^/.]+/?[^/.]+[/]?)?(images|js|stylesheets|lib[^/.]+)/(.*)$ $3/$4 [L]
@@ -53,7 +41,6 @@
 
 
 		# GLOBALS
->>>>>>> Revised - More Features Added
 
 		# If none redirects to just the php file
 		RewriteRule ^([A-Za-z\-\_]+)$ $1.php?page=$1 [L]
@@ -65,12 +52,6 @@
 		# Redirect external .php requests to extensionless url
 		RewriteCond %{THE_REQUEST} ^(.+)\.php([#?][^\ ]*)?\ HTTP/
 		RewriteRule ^(.+)\.php$ $1 [R=301,L]
-<<<<<<< HEAD
-
-		# Resolve .php file for extensionless php urls
-		RewriteRule ^([^/.]+)$ $1.php [L]
-=======
->>>>>>> Revised - More Features Added
 
 		# Resolve .php file for extensionless php urls
 		RewriteRule ^([^/.]+)$ $1.php [L]
