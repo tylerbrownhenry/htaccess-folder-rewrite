@@ -3,14 +3,57 @@
 <IfModule mod_rewrite.c>
 
 		RewriteEngine On
-
 		RewriteBase /template/responsive_test/
 
+<<<<<<< HEAD
 		# Replaces the relative links to the root directory for images/stylesheets/js files
 		RewriteRule ^([A-Za-z\-\_]+)[\/]?([^/.]?+/?[^/.]+/?[^/.]+/?[^/.]+[/]?)?(images|js|stylesheets|lib[^/.]+)/(.*)$ $3/$4 [L]
 
 		# Changes the 'fake' folders in php variables
 		RewriteRule ^((?!images|js|stylesheets|lib)[A-Za-z\-\_]+)/([^/.]+)/?([^/.]+)/?([^/.]+)/?([^/.]+) $1.php?b=$1&d=$2&f=$3&h=$4&g=$5 [L]
+=======
+
+
+
+		# Replaces the relative links to the root directory for images/stylesheets/js files
+		RewriteRule ^([A-Za-z\-\_]+)[\/]?([^/.]?+/?[^/.]+/?[^/.]+/?[^/.]+/?[^/.]+/?[^/.]+/?[^/.]+/?[^/.]+[/]?)?(images|js|stylesheets|lib[^/.]+)/(.*)$ $3/$4 [L]
+
+		RewriteRule ^((?!images|js|stylesheets|lib)[A-Za-z\-\_]+)/(([^/.]+)?/?([^/.]+)?/?([^/.]+)?/?([^/.]+)?/?([^/.]+)?/?([^/.]+)?/?([^/.]+)?/?) $1.php?page=$1&allvariables=$2&pagetype=$3&pagination=$4&year=$5&make=$6&model=$7&sortBy=$8&vin=$9
+
+
+
+
+		# INVENTORY
+
+		# When searching the inventory, this rewrites the url based on the form submission
+		# It removes the parameters from the url and writes them as fake folders
+		RewriteCond %{QUERY_STRING} ^form_year=([^/]+)&form_make=([^/]+)&form_model=([^/]+)&form_page=([^/]+)&sortBy=([^/]+)&form_type=([^/]+)$ [NC]
+		RewriteRule ^form_submit? inventory/%6/1/%1/%2/%3/%5\? [R=301,L]
+
+
+
+		# HOME PAGE
+
+		# When searching on the homepage (index.php) and have selected year/make/model this takes you to the inventory page
+		# (Only used when JS is disabled)
+		RewriteCond %{QUERY_STRING} ^form_year=([^/]+)&form_make=([^/]+)&form_model=([^/]+)&form_page=([^/]+)&form_type=([^/]+)$ [NC]
+		RewriteRule ^form_submit? inventory/new/1/%1/%2/%3\? [R=301,L]
+
+		# When searching on the homepage (index.php) this refreshes the page if you select year/make
+		# (Only used when JS is disabled)
+		RewriteCond %{QUERY_STRING} ^form_year=([^/]+)&form_make=([^/]+)&form_page=([^/]+)&form_type=([^/]+)$ [NC]
+		RewriteRule ^form_submit? %3/%4/1/%1/%2\? [R=301,L]
+
+		# When searching on the homepage (index.php) this refreshes the page if you select year
+		# (Only used when JS is disabled)
+		RewriteCond %{QUERY_STRING} ^form_year=([^/]+)&form_page=([^/]+)&form_type=([^/]+)$ [NC]
+		RewriteRule ^form_submit? %2/%3/1/%1\? [R=301,L]
+
+
+
+
+		# GLOBALS
+>>>>>>> Revised - More Features Added
 
 		# If none redirects to just the php file
 		RewriteRule ^([A-Za-z\-\_]+)$ $1.php?page=$1 [L]
@@ -22,9 +65,14 @@
 		# Redirect external .php requests to extensionless url
 		RewriteCond %{THE_REQUEST} ^(.+)\.php([#?][^\ ]*)?\ HTTP/
 		RewriteRule ^(.+)\.php$ $1 [R=301,L]
+<<<<<<< HEAD
+
+		# Resolve .php file for extensionless php urls
+		RewriteRule ^([^/.]+)$ $1.php [L]
+=======
+>>>>>>> Revised - More Features Added
 
 		# Resolve .php file for extensionless php urls
 		RewriteRule ^([^/.]+)$ $1.php [L]
 
 </IfModule>
-
